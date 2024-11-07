@@ -1,0 +1,5 @@
+mutation add_book_mark($object: virtual_product_bookmark_insert_input!) {
+  insert_virtual_product_bookmark_one(object: $object) {
+    user_id
+  }
+}

@@ -1,0 +1,5 @@
+mutation insert_into_cart($object: insert_into_cart_args!) {
+  update_or_insert_cart: insert_into_cart(args: $object) {
+    id
+  }
+}

@@ -1,0 +1,11 @@
+query ($where: service_virtual_service_bookmark_bool_exp!) {
+  b: service_virtual_service_bookmark(where: $where) {
+    service_id
+    s: virtual_service {
+      id
+      title
+      logo
+      average_rate
+    }
+  }
+}

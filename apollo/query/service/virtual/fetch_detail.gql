@@ -1,0 +1,62 @@
+query fetch_detail_vertual_service($where: service_virtual_service_bool_exp!) {
+  detail: service_virtual_service(where: $where) {
+    id
+    title
+    description
+    logo
+    average_rate
+    license
+    web_link
+    phone_number
+    social_media
+    created_at
+    updated_at
+    supplier {
+      userById {
+        first_name
+        last_name
+        email
+        phone_number
+      }
+    }
+    media: virtual_service_media {
+      url
+      type
+    }
+
+    review: virtual_service_rates(where: { comment: { _is_null: false } }) {
+      comment
+      rate
+      user {
+        first_name
+        last_name
+        email
+      }
+    }
+
+    category: virtual_service_category {
+      id
+      name: original_language {
+        to: translation_contents {
+          name
+          type: language_type
+        }
+      }
+
+      related_service: virtual_services(
+        limit: 10
+        where: { release_status: { _eq: "verified" } }
+      ) {
+        id
+        title
+        description
+        logo
+        average_rate
+        media: virtual_service_media {
+          url
+          type
+        }
+      }
+    }
+  }
+}

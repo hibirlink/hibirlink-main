@@ -1,0 +1,5 @@
+query payable($userId: String!) {
+  user:users_by_pk(id: $userId){
+    total_price
+  }
+}

@@ -1,0 +1,53 @@
+query ($where: product_order_bool_exp!, $order_detail: order_detail_bool_exp) {
+  product_order(where: $where) {
+    customer_id
+    id
+    user {
+      first_name
+      last_name
+    }
+    shipping_address {
+      longitude
+      latitude
+      state_provinence
+      sub_city {
+        original_language {
+          translation_contents {
+            name
+          }
+        }
+        region_city {
+          original_language {
+            translation_contents {
+              name
+            }
+          }
+        }
+      }
+    }
+    with_delivery
+    transaction_key
+    created_at
+    delivery_provider {
+      name
+    }
+    order_details(where: $order_detail) {
+      id
+      status
+      order_id
+      unit_price
+      quantity
+      discount
+      special_discount_rate
+      physical_product {
+        id
+        title
+        status
+        store {
+          id
+          name
+        }
+      }
+    }
+  }
+}

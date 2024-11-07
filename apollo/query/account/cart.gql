@@ -1,0 +1,51 @@
+query listout($userId: String!) {
+  cart: shopping_cart(where: {user_id: {_eq: $userId}}, order_by: {created_at: desc}) {
+    id
+    product_id
+    quantity
+    created_at
+    updated_at
+    product: physical_product {
+      id
+      title
+      cover_image
+      is_avaliable
+      unit_price
+      price_type
+      discount
+      min_order
+      quantity
+      subcat: physical_product_sub_category {
+        lang: original_language {
+          content: translation_contents {
+            name
+            language_type
+          }
+        }
+        cat: physical_product_category {
+          lang: original_language {
+            content: translation_contents {
+              name
+              language_type
+            }
+          }
+        }
+      }
+      store {
+        supplier {
+          userById {
+            first_name
+            last_name
+          }
+        }
+      }
+      special_discount: product_discount {
+        id
+        rate
+        reason
+        start_date
+        end_date
+      }
+    }
+  }
+}

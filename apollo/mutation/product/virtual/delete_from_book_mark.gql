@@ -1,0 +1,8 @@
+mutation delete_from_mark($product_id: bigint!, $user_id: String!) {
+  delete_virtual_product_bookmark_by_pk(
+    product_id: $product_id
+    user_id: $user_id
+  ) {
+    product_id
+  }
+}

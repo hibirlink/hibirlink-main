@@ -1,0 +1,8 @@
+mutation verify_token($token: String!) {
+  verifyToken(input: { token: $token }) {
+    id
+    email
+    first_name
+    last_name
+  }
+}

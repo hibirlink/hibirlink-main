@@ -1,0 +1,103 @@
+query fetch_service_detail(
+  $where: service_realtime_service_bool_exp!
+  $id: bigint!
+) {
+  detail: service_realtime_service(where: $where) {
+    id
+    title
+    logo
+    description
+    license
+    average_rate
+    created_at
+    availability
+
+    availability
+    phone_number
+    medias: realtime_service_media {
+      id
+      url
+      type
+    }
+
+    release_status
+
+    supplier {
+      userById {
+        id
+        first_name
+        last_name
+        email
+        phone_number
+      }
+    }
+
+    service_addresses {
+      latitude
+      longitude
+      description
+      sub_city {
+        name: original_language {
+          to: translation_contents {
+            type: language_type
+            name
+          }
+        }
+        region_city {
+          name: original_language {
+            to: translation_contents {
+              type: language_type
+              name
+            }
+          }
+        }
+      }
+    }
+
+    review: realtime_service_rates(where: { comment: { _is_null: false } }) {
+      comment
+      rate
+      user {
+        email
+        first_name
+        last_name
+        id
+      }
+    }
+
+    category: realtime_service_category {
+      id
+      logo
+      name: original_language {
+        to: translation_contents {
+          type: language_type
+          name
+        }
+      }
+      related_service: realtime_services(
+        limit: 10
+        offset: 0
+        where: { id: { _neq: $id }, release_status: { _eq: "verified" } }
+        order_by: { average_rate: asc_nulls_last }
+      ) {
+        id
+        title
+        logo
+        average_rate
+        media: realtime_service_media {
+          url
+          type
+        }
+
+        supplier {
+          userById {
+            first_name
+            id
+            last_name
+            email
+          }
+        }
+      }
+    }
+  }
+}

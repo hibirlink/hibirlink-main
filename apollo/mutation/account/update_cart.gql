@@ -1,0 +1,9 @@
+mutation update_cart($productId: bigint!, $userId: String!, $qt: Int!) {
+  updateCart:update_shopping_cart_by_pk(_set: {quantity: $qt}, pk_columns:{product_id: $productId, user_id: $userId}){
+    id
+    quantity
+    product:physical_product{
+      title
+    }
+  }
+}

@@ -1,0 +1,47 @@
+query top_rated_service(
+  $where: service_realtime_service_bool_exp!
+  $limit: Int!
+) {
+  service: service_realtime_service(
+    limit: $limit
+    order_by: { average_rate: desc_nulls_last }
+    where: $where
+  ) {
+    id
+    title
+
+    description
+    availability
+    category_id
+    average_rate: average_rate
+    logo
+    medias: realtime_service_media {
+      type
+      id
+      url
+    }
+    supplier {
+      userById {
+        first_name
+        last_name
+        email
+        id
+      }
+    }
+
+    category: realtime_service_category {
+      id
+      name: original_language {
+        to: translation_contents {
+          language_type
+          name
+        }
+      }
+    }
+  }
+  total: service_realtime_service_aggregate(where: $where) {
+    top_rated: aggregate {
+      value: count
+    }
+  }
+}

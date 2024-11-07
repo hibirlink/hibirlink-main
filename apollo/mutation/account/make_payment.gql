@@ -1,0 +1,6 @@
+mutation makePayment($paymentArg: PaymentInput!){
+  makePayment(paymentArg: $paymentArg){
+    success
+    paymentUrl
+  }
+}

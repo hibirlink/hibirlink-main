@@ -1,0 +1,50 @@
+query fetch_virtual_services(
+  $where: service_virtual_service_bool_exp!
+  $limit: Int
+  $offset: Int
+  $order_by: [service_virtual_service_order_by!]
+) {
+  service: service_virtual_service(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: $order_by
+  ) {
+    id
+    title
+    description
+    logo
+    social_media
+    created_at
+    updated_at
+    average_rate
+    supplier {
+      userById {
+        id
+        email
+        first_name
+        last_name
+      }
+    }
+    medias: virtual_service_media {
+      url
+      type
+    }
+
+    virtual_service_category {
+      id
+      name: original_language {
+        to: translation_contents {
+          language_type
+          name
+        }
+      }
+    }
+  }
+
+  total: service_virtual_service_aggregate(where: $where) {
+    service: aggregate {
+      value: count
+    }
+  }
+}

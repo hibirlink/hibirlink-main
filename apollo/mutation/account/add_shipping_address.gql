@@ -1,0 +1,29 @@
+mutation addAddress($address: shipping_address_insert_input!) {
+  address:insert_shipping_address_one(object: $address) {
+    id
+    email
+    phone_number1
+    phone_number2
+    description
+    state_provinence
+    longitude
+    latitude
+    sub_city{
+      name:original_language{
+        to:translation_contents{
+          name
+          language_type
+        }
+      }
+      region:region_city{
+        name:original_language{
+          to:translation_contents{
+            name
+            language_type
+          }
+        }
+      }
+    }
+    zip_code
+  }
+}

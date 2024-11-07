@@ -1,0 +1,112 @@
+query detail_physical_product($id: bigint!) {
+  product:physical_product(
+    where: { id: { _eq: $id }, release_status: { _eq: "verified" } }
+  ) {
+    id
+    title
+    average_rate
+    cover_image
+    description
+    created_at
+    quantity
+    min_order
+    unit_price
+    discount
+    selling_price
+    is_avaliable
+    status
+    product_discount {
+      id
+      rate
+      reason
+      start_date
+      end_date
+    }
+
+    medias: physical_product_media {
+      id
+      url
+      type
+    }
+    comment: physical_product_rates(where: { comment: { _is_null: false } }) {
+      user {
+        id
+        first_name
+        last_name
+        email
+      }
+      comment
+      rate
+    }
+
+    sub_category: physical_product_sub_category {
+      related_products: physical_products(
+        limit: 10
+        order_by: { average_rate: asc_nulls_last }
+      ) {
+        id
+        cover_image
+        title
+        quantity
+        selling_price
+        status
+        product_discount {
+          id
+          start_date
+
+          end_date
+        }
+      }
+
+      category: physical_product_category {
+        id
+        name: original_language {
+          to: translation_contents {
+            name
+            type:language_type
+          }
+        }
+      }
+      id
+      name: original_language {
+        to: translation_contents {
+          name
+          type:language_type
+        }
+      }
+    }
+
+    store {
+      latitude
+      longitude
+      phone_number
+      name
+      licence
+      supplier {
+        userById {
+          id
+          first_name
+          last_name
+          phone_number
+          email
+        }
+      }
+      sub_city {
+        name: original_language {
+          to: translation_contents {
+            name
+            type:language_type
+          }
+        }
+        region_city {
+          name: original_language {
+            to: translation_contents {
+              name
+              type:language_type
+            }
+          }
+        }
+      }
+    }
+  }
+}

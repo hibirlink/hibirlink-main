@@ -1,0 +1,7 @@
+mutation delete_cart($productId: bigint!, $userId: String!) {
+  deleteCart:delete_shopping_cart_by_pk(product_id: $productId, user_id: $userId){
+    product:physical_product{
+      title
+    }
+  }
+}

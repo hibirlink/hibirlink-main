@@ -1,0 +1,9 @@
+query fetch_your_comment_and_rate($service_id: bigint!, $user_id: String!) {
+  review: service_realtime_service_rate_by_pk(
+    service_id: $service_id
+    user_id: $user_id
+  ) {
+    comment
+    rate
+  }
+}

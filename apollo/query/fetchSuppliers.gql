@@ -1,0 +1,5 @@
+query suppliers {
+  supplier {
+    id
+  }
+}

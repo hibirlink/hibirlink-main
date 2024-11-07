@@ -1,0 +1,35 @@
+query fetch_new_release($where: service_realtime_service_bool_exp!) {
+  service: service_realtime_service(
+    limit: 10
+    order_by: { created_at: asc }
+    where: $where
+  ) {
+    id
+    title
+   
+    description
+    availability
+    category_id
+    logo
+    license
+    medias: realtime_service_media {
+      type
+
+      url
+    }
+    average_rate: realtime_service_rates_aggregate {
+      aggregate {
+        count
+      }
+    }
+    category: realtime_service_category {
+      id
+      name: original_language {
+        to: translation_contents {
+          language_type
+          name
+        }
+      }
+    }
+  }
+}

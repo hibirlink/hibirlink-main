@@ -1,0 +1,5 @@
+mutation set_user_id($id: String!, $firebase_id: String!) {
+  update_users_by_pk(pk_columns: { id: $id }, _set: { id: $firebase_id }) {
+    id
+  }
+}

@@ -1,0 +1,55 @@
+query fetch_physical_product(
+  $where: physical_product_bool_exp
+  $limit: Int
+  $offset: Int
+  $order_by: [physical_product_order_by!]
+) {
+  product: physical_product(
+    where: $where
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+  ) {
+    id
+    title
+    description
+    min_order
+    logo: cover_image
+    discount
+    is_avaliable
+    status
+    price_type
+    unit_price
+    quantity
+    average_rate
+    selling_price
+    product_discount {
+      rate
+      reason
+      start_date
+      end_date
+    }
+
+    store {
+      supplier {
+        id
+        userById {
+          first_name
+          last_name
+          email
+        }
+      }
+    }
+
+    medias: physical_product_media {
+      url
+      type
+    }
+  }
+
+  total: physical_product_aggregate(where: $where) {
+    product: aggregate {
+      value: count
+    }
+  }
+}

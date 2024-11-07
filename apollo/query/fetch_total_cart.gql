@@ -1,0 +1,7 @@
+query($user_id:String!){
+  total:shopping_cart_aggregate(where:{user_id:{_eq:$user_id}}){
+    cart:aggregate{
+      count
+    }
+  }
+}

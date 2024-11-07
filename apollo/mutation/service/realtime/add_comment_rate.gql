@@ -1,0 +1,11 @@
+mutation add_comment_rate_realtime(
+  $object: service_realtime_service_rate_insert_input!
+  $onconflict: service_realtime_service_rate_on_conflict
+) {
+  insert_service_realtime_service_rate_one(
+    object: $object
+    on_conflict: $onconflict
+  ) {
+    user_id
+  }
+}

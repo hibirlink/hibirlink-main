@@ -1,0 +1,12 @@
+query fetch_virual_category {
+  category: service_virtual_service_category {
+    id
+    logo
+    name: original_language {
+      to: translation_contents {
+        name
+        type: language_type
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+query fetch_virtual_product_detail($where: virtual_product_bool_exp!) {
+  detail: virtual_product(where: $where) {
+    id
+    title
+    unit_price
+    cover_image
+    unit_price
+    release_status
+    average_rate
+    demo_link
+    description
+
+    supplier {
+      userById {
+        first_name
+        last_name
+        email
+      }
+    }
+
+   category: virtual_product_category {
+      id
+      name: original_language {
+        to: translation_contents {
+          name
+          type: language_type
+        }
+      }
+
+      related_product: virtual_products(
+        where: { release_status: { _eq: "verified" } }
+        limit: 10
+      ) {
+        id
+        title
+        unit_price
+        cover_image
+        unit_price
+        release_status
+        average_rate
+        demo_link
+        description
+      }
+    }
+
+    review: virtual_product_rates {
+      comment
+      rate
+      user {
+        first_name
+        last_name
+        email
+      }
+    }
+
+    medias: virtual_product_media {
+      id
+      type
+      url
+    }
+    created_at
+    updated_at
+    supplier {
+      userById {
+        phone_number
+        first_name
+        last_name
+        email
+      }
+    }
+  }
+}

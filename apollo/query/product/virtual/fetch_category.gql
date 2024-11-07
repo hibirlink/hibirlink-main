@@ -1,0 +1,12 @@
+query fetch_virtual_product_category {
+  category: virtual_product_category {
+    id
+    logo
+    name: original_language {
+      to: translation_contents {
+        type: language_type
+        name
+      }
+    }
+  }
+}

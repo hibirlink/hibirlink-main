@@ -1,0 +1,5 @@
+mutation checkCart($userId: String!){
+  check_cart(args: {customer_id: $userId}){
+    id 
+  }
+}

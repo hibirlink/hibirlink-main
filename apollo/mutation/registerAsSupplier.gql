@@ -1,0 +1,13 @@
+# mutation ($object: RegisterAsSupplierInput!) {
+#   registerAsSupplier(object: $object) {
+#     accessToken
+#   }
+# }
+mutation ($object: RegisterAsSupplierInput!, $uid: String!) {
+  registerAsSupplier(object: $object) {
+    accessToken
+  }
+  update_users_by_pk(_set: { status: "pending" }, pk_columns: { id: $uid }) {
+    id
+  }
+}

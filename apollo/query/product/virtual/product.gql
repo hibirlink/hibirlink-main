@@ -1,0 +1,43 @@
+query service(
+  $where: virtual_product_bool_exp!
+  $limit: Int
+  $offset: Int
+  $order_by: [virtual_product_order_by!]
+) {
+  product: virtual_product(
+    where: $where
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+  ) {
+    id
+    category_id
+    title
+    release_status
+
+    cover_image
+    demo_link
+    description
+    unit_price
+    supplier {
+      id
+      userById {
+        first_name
+        last_name
+        email
+      }
+    }
+
+    medias: virtual_product_media {
+      type
+      url
+      id
+    }
+  }
+
+  total: virtual_product_aggregate(where: $where) {
+    product: aggregate {
+      value: count
+    }
+  }
+}

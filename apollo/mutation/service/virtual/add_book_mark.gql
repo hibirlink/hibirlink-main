@@ -1,0 +1,7 @@
+mutation add_book_mark(
+  $object: service_virtual_service_bookmark_insert_input!
+) {
+  insert_service_virtual_service_bookmark_one(object: $object) {
+    user_id
+  }
+}

@@ -1,0 +1,11 @@
+query ($where: virtual_product_bookmark_bool_exp!) {
+  b: virtual_product_bookmark(where: $where) {
+    product_id
+    s: virtual_product {
+      id
+      title
+      cover_image
+      average_rate
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query fetch_your_comment_and_rate($product_id: bigint!, $user_id: String!) {
+  review: physical_product_rate_by_pk(
+    product_id: $product_id
+    user_id: $user_id
+  ) {
+    comment
+    rate
+  }
+}

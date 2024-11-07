@@ -1,0 +1,8 @@
+mutation add_comment_rate_virtual(
+  $object: virtual_product_rate_insert_input!
+  $onconflict: virtual_product_rate_on_conflict
+) {
+  insert_virtual_product_rate_one(object: $object, on_conflict: $onconflict) {
+    user_id
+  }
+}

@@ -1,0 +1,13 @@
+query fetch_product_category {
+  subcategory: physical_product_sub_category {
+    id
+    category_id
+    logo
+    name: original_language {
+      to: translation_contents {
+        name
+        type: language_type
+      }
+    }
+  }
+}

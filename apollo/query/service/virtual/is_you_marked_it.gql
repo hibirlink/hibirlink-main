@@ -1,0 +1,8 @@
+query is_book_marked($service_id: bigint!, $user_id: String!) {
+  is_marked_it: service_virtual_service_bookmark_by_pk(
+    service_id: $service_id
+    user_id: $user_id
+  ) {
+    service_id
+  }
+}

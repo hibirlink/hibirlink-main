@@ -1,0 +1,8 @@
+query fetch_your_marked($product_id: bigint!, $user_id: String!) {
+  your_mark: virtual_product_bookmark_by_pk(
+    product_id: $product_id
+    user_id: $user_id
+  ) {
+    user_id
+  }
+}

@@ -1,0 +1,8 @@
+mutation add_comment_rate(
+  $object: physical_product_rate_insert_input!
+  $onconflict: physical_product_rate_on_conflict
+) {
+  insert_physical_product_rate_one(object: $object, on_conflict: $onconflict) {
+    user_id
+  }
+}
